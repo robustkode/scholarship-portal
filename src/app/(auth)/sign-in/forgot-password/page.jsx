@@ -53,7 +53,7 @@ export default function ForgotPasswordPage() {
 
   return (
     <div>
-      <h1 className="text-center">Forgot Password</h1>
+      <h1 className="mb-6 header text-2xl text-center">Forgot Password</h1>
       {isSuccess && (
         <Alert variant="success">
           <Terminal className="h-4 w-4" />

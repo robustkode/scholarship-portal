@@ -22,7 +22,7 @@ export default function VideoCard({ title, link, tag }) {
         {tagsList?.map((t, i) => (
           <span
             key={i}
-            className="px-2 py-1 bg-primary-lig rounded-sm text-primary-dark text-sm"
+            className="px-2 py-1 bg-primary-lig rounded-sm text-black text-sm"
           >
             {t}
           </span>

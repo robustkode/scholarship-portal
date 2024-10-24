@@ -6,7 +6,7 @@ export default function BlogCard({ title, content, id, page, edit = false }) {
   return (
     <div className="flex flex-col bg-gray-200 border-l-4 border-primary px-6 py-4 shadow-md relative">
       {edit ? (
-        <div className="right-4 top-4 absolute">
+        <div className="right-4 top-4 absolute bg-secondary rounded-full text-secondary-foreground">
           <Button
             variant="ghost"
             className="p-2 hover:bg-primary-lig rounded-full"

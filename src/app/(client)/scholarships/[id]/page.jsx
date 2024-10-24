@@ -10,11 +10,11 @@ import Image from "next/image";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { Suspense } from "react";
-import Loading from "../loading";
+import Loading from "../_components/loading";
 import { cache } from "@/lib/cache";
 
 export const dynamic = "force-static";
-//! how to add tag  here
+//? how to add tag  here
 const cachedScholarship = cache(async (params) => {
   return fetchScholarshipUseCase(params.id);
 }, []);
@@ -46,12 +46,13 @@ export async function generateMetadata({ params }) {
 }
 
 export default async function Scholarship({ params }) {
-  //! use safe params
   return (
     <main>
-      <Suspense fallback={<Loading />}>
-        <ScholarshipSusPense params={params} />
-      </Suspense>
+      <div className="lg:col-span-4">
+        <Suspense fallback={<Loading />}>
+          <ScholarshipSusPense params={params} />
+        </Suspense>
+      </div>
     </main>
   );
 }
@@ -142,8 +143,8 @@ async function ScholarshipSusPense({ params }) {
           </div>
         </Container>
       </div>
-      <section>
-        <Container as="div" className="flex flex-col">
+      <Container as="div" className={"grid lg:grid-cols-5 gap-8"}>
+        <section className="flex flex-col py-12 lg:col-span-4">
           {coverImage && isValidURL(coverImage) ? (
             <Image
               src={coverImage}
@@ -159,7 +160,7 @@ async function ScholarshipSusPense({ params }) {
             {dangerousContents.map((content, i) =>
               !isEmpty(content.value) ? (
                 <div className="" key={i}>
-                  <h3 className="section-header text-primary">
+                  <h3 className="text-header font-bold text-2xl pb-3  pt-6">
                     {content.label}
                   </h3>
                   <div
@@ -172,9 +173,15 @@ async function ScholarshipSusPense({ params }) {
               )
             )}
           </div>
-        </Container>
-      </section>
-      <ShareContent label={"scholarship"} />
+        </section>
+        <aside className="bg-primary-lig rounded-sm lg:my-8 mt-8 flex justify-center items-center h-32 lg:h-auto w-[100%]  order-1 md:order-2 mb-12">
+          Some content
+        </aside>
+      </Container>
+
+      <Container className={"pb-12"}>
+        <ShareContent label={"scholarship"} />
+      </Container>
     </>
   );
 }

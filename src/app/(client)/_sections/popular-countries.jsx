@@ -12,7 +12,7 @@ const CachedPopulars = cache(
     return await fetchPopulars(6);
   },
   ["home-popular-scholarships"],
-  { revalidate: 3600, tags: ["home-popular-scholarships"] } //! edit this one hour
+  { revalidate: 60 * 60, tags: ["home-popular-scholarships"] }
 );
 
 const getLabel = (name) => {
@@ -22,8 +22,8 @@ const getLabel = (name) => {
 
 export default async function PopularCountries() {
   return (
-    <section className="bg-primary-lig pb-4">
-      <Container>
+    <section className="bg-primary-lig">
+      <Container className={"py-12"}>
         <h3 className="section-header">Popular Countries</h3>
 
         <Suspense

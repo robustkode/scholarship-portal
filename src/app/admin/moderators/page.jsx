@@ -142,7 +142,7 @@ export default function Moderators() {
           ) : isError ? (
             <ErrorMessage message={error.message} retry={refetch} />
           ) : !data.length ? (
-            <div className="flex flex-col items-center gap-4">
+            <div className="flex flex-col items-center gap-4 mt-12">
               <h2 className="text-2xl">No moderators yet!</h2>
               <Button
                 className="w-fit"

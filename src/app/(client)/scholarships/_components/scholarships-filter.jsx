@@ -92,11 +92,11 @@ const COUNTRIES_FILTER = {
 function Filter() {
   return (
     <>
-      <div className="hidden sm:block">
+      <div className="hidden md:block">
         <Main />
       </div>
 
-      <div className="sm:hidden">
+      <div className="md:hidden">
         <Drawer>
           <DrawerTrigger asChild>
             <Button variant="outline" className="flex items-center gap-2">

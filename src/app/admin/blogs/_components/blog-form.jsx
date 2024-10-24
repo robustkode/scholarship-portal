@@ -119,7 +119,7 @@ export default function BlogForm({ data, page }) {
 
   //! title must be uniq, so handle error message
   return (
-    <main>
+    <main className="my-12">
       <Container>
         <Form {...form}>
           <form onSubmit={form.handleSubmit(onSubmit)}>
@@ -169,14 +169,13 @@ export default function BlogForm({ data, page }) {
                 </FormItem>
               )}
             />
-            <div className="flex gap-2 justify-between flex-wrap mt-6">
-              <LoaderButton type="submit" isLoading={isPending}>
-                {data ? "Update blog" : "Post blog"}
-              </LoaderButton>
-
+            <div className="flex gap-2 justify-end flex-wrap mt-6 gap-4">
               {data && (
                 <DeleteBlogButton type="button">Delete</DeleteBlogButton>
               )}
+              <LoaderButton type="submit" isLoading={isPending}>
+                {data ? "Update blog" : "Post blog"}
+              </LoaderButton>
             </div>
           </form>
         </Form>

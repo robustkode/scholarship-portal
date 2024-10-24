@@ -20,7 +20,7 @@ export default function AdminPanel() {
   });
 
   return (
-    <main className="bg-gray-100 py-8">
+    <main className="bg-gray-100 py-8 min-h-[70vh]">
       <Container as="div" className="flex flex-wrap gap-8">
         {isPending ? (
           <div className="flex flex-wrap gap-6 pt-12">

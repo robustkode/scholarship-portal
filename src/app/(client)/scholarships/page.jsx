@@ -18,6 +18,13 @@ import { useFilterContext } from "./_context";
 import GroupPagination from "@/components/group-pagination";
 import { ScholarshipSkeleton } from "@/components/loading/scholarship-skeleton";
 import ErrorMessage from "@/components/error-message";
+import PagesHero from "@/components/pages-hero";
+
+const HERO = {
+  header: "Find your ideal scholarships",
+  description:
+    " You can easily filter scholarships by country and education level to find the perfect opportunities tailored to your needs.",
+};
 
 const fetchFilteredScholarships = async (filters) => {
   return apiClient.post("/scholarships", {
@@ -83,8 +90,8 @@ export default function Scholarships() {
 
   return (
     <main className="mb-16">
-      <Container as="div" className="">
-        <h2 className="page-header">Find your ideal scholarships</h2>
+      <PagesHero header={HERO.header} description={HERO.description} />
+      <Container as="div" className="py-12">
         <div className="grid md:grid-cols-3 gap-4 w-full">
           <Filter />
           <div className="md:col-span-2 pb-16 bg-gray-100/40 rounded-sm">
@@ -97,11 +104,11 @@ export default function Scholarships() {
             )}
 
             {isPending ? (
-              <div className="mt-8 flex flex-wrap gap-8 p-8">
+              <Container className="mt-8 flex flex-wrap gap-8 p-8">
                 {[...Array(6)].map((_, i) => (
                   <ScholarshipSkeleton key={i} className="mb-8" />
                 ))}
-              </div>
+              </Container>
             ) : isError ? (
               <ErrorMessage message={error.message} retry={refetch} />
             ) : !data?.scholarships || !data.scholarships.length ? (
@@ -110,7 +117,7 @@ export default function Scholarships() {
                 <p>Try other filters</p>
               </div>
             ) : (
-              <div className="px-6">
+              <div className="px-6 py-12">
                 <p className="section-header">{data.totalCount} scholarships</p>
                 <div className="flex flex-wrap gap-6">
                   {data?.scholarships.map((sch) => (

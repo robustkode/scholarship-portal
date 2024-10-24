@@ -7,7 +7,7 @@ import { assertModerator } from "@/use-cases/authorization";
 export default async function EditScholarship({ params }) {
   const { id } = params;
   return (
-    <main className="bg-gray-100">
+    <main className="">
       <Suspense fallback={<div>Loading ...</div>}>
         <ScholarshipFormSuspense id={id} />
       </Suspense>

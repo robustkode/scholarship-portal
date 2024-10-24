@@ -17,7 +17,7 @@ const cachedRecents = cache(
 
 export default async function Recents() {
   return (
-    <Container>
+    <Container className={"my-12"}>
       <h3 className="section-header">Recent scholarships</h3>
       <Suspense
         fallback={

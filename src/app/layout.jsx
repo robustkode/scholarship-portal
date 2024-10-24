@@ -47,7 +47,6 @@ export default async function RootLayout({ children }) {
           <Navbar />
           {moderator ? <AdminNavbar /> : ""}
           {children}
-          <Footer />
         </Providers>
         <Toaster />
       </body>

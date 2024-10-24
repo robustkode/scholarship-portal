@@ -75,10 +75,8 @@ export default function Blog() {
             !toggle ? (
               <div className="flex flex-col items-center gap-4">
                 <h2 className="text-2xl">No Blogs yet!</h2>
-                <Button className="ml-auto">
-                  <Link href={"/admin/scholarships/create"}>
-                    Create a scholarship
-                  </Link>
+                <Button as="div" variant="outline">
+                  <Link href={"/admin/blogs/write"}>Write blog</Link>
                 </Button>
               </div>
             ) : (

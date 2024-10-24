@@ -18,7 +18,7 @@ export function Toolbar({ editor }) {
     return null;
   }
   return (
-    <div className="bg-gray-200 flex gap-2">
+    <div className="bg-gray-200 flex gap-2 w-full">
       <Toggle
         size="sm"
         pressed={editor.isActive("heading1")}

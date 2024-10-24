@@ -33,31 +33,31 @@ export default function Navbar() {
   };
 
   return (
-    <header>
-      <Container as="div" className="py-4">
+    <header className="border-b border-primary">
+      <Container as="div" className="py-2">
         <div className="flex w-full items-center">
           {!toggleNav ? (
             <AlignLeft
-              className="sm:hidden mr-2"
+              className="sm:hidden mr-4 cursor-pointer"
               onClick={(event) => handleToggleNav(event)}
             />
           ) : (
             <X
-              className="icon-lg mr-2 sm:hidden"
+              className="icon-lg mr-4 sm:hidden cursor-pointer"
               onClick={(event) => handleToggleNav(event)}
             />
           )}
           <Link href="/" className="sm:pr-16 pr-2 flex items-center">
-            <h1 className="sm:text-2xl text-lg header whitespace-nowrap">
+            <h1 className="sm:text-xl text-lg header whitespace-nowrap py-2">
               Hermy-Academy
             </h1>
           </Link>
 
-          <Button className="ml-auto sm:hidden text-red-500 bg-primary-lig/60 px-4 rounded-md py-0">
+          {/* <Button className="ml-auto sm:hidden text-red-500 bg-transparent  px-4 rounded-md py-0 h-fit">
             <Link href={"/guides"}>
               <Youtube className="icon-lg" />
             </Link>
-          </Button>
+          </Button> */}
 
           <nav className="w-full hidden sm:block pt-2">
             <ul className="flex gap-8 items-center  h-8 small-nav-link">
@@ -104,7 +104,7 @@ export default function Navbar() {
           </nav>
           {toggleNav && (
             <nav
-              className="md:hidden absolute top-16 left-0 bg-gray-900/80 h-[100vh] w-[100vw]"
+              className="md:hidden absolute top-[60px] left-0 bg-gray-900/80 h-[100vh] w-[100vw] z-8 vertical-nav"
               onClick={() => setToggleNav(false)}
             >
               <ul className="flex flex-col  gap-2 h-8 bg-background pl-5 pt-4  h-[100vh] w-48 border-t-2 border-primary ">

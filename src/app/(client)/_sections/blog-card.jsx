@@ -11,7 +11,7 @@ export default async function BlogCard({
 }) {
   const tagsList = capitalizeStringArray(tags, ",", true) || [];
   return (
-    <div className="bg-gray-100 px-6 py-6 rounded-sm shadow-lg">
+    <div className="bg-gray-100 px-6 py-6 rounded-sm shadow-sm">
       <Link href={"/blogs/" + id}>
         <div>
           <h4 className="text-xl pb-2 text-header font-bold">{title}</h4>
@@ -26,7 +26,7 @@ export default async function BlogCard({
             dangerouslySetInnerHTML={{ __html: content }}
             className="line-clamp-3"
           ></div>
-          <p className="underline text-primary mt-1">Read more</p>
+          <p className="text-primary mt-1 text-sm">Read more</p>
         </div>
       </Link>
     </div>

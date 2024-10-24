@@ -8,6 +8,13 @@ import { useEffect, useState } from "react";
 import VideoCard from "@/components/video-card";
 import { Skeleton } from "@/components/ui/skeleton";
 import ErrorMessage from "@/components/error-message";
+import PagesHero from "@/components/pages-hero";
+
+const HERO = {
+  header: "Guiding videos",
+  description:
+    "We’ve created a series of informative videos designed to make your scholarship application process easier and more effective.",
+};
 
 const fetchVideos = (pageParam) => {
   return apiClient.get("/guides?pageParam=" + pageParam);
@@ -41,7 +48,8 @@ export default function Guides() {
 
   return (
     <main>
-      <Container>
+      <PagesHero header={HERO.header} description={HERO.description} />
+      <Container as="div">
         {isPending ? (
           <div className="grid md:grid-cols-2 gap-8 lg:grid-cols-3 mt-8">
             {[...Array(6)].map((_, i) => (

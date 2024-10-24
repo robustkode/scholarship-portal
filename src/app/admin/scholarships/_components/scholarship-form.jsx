@@ -103,12 +103,12 @@ const ScholarshipSchema = z.object({
 export default function ScholarshipForm({ data }) {
   const [coverImg, setImgCoverImg] = useState(data?.coverImage || null);
   const [selectedCountries, setSelectedCountries] = useState(
-    data.countries ? data.countries.split(",") : []
+    data?.countries ? data.countries.split(",") : []
   );
   const [selectedDegrees, setSelectedDegrees] = useState(
-    data.degrees ? data.degrees.split(",") : []
+    data?.degrees ? data.degrees.split(",") : []
   );
-  console.log(data, "data");
+  // console.log(data, "data");
   const { toast } = useToast();
   const form = useForm({
     mode: "onchange",
@@ -209,7 +209,7 @@ export default function ScholarshipForm({ data }) {
   }
 
   return (
-    <div className="">
+    <div className="py-12">
       <Container>
         <Form {...form}>
           <form onSubmit={form.handleSubmit(onSubmit)} className="px-4">

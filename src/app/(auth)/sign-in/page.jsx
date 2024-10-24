@@ -18,6 +18,8 @@ import { useServerAction } from "zsa-react";
 import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert";
 import { Terminal } from "lucide-react";
 import { signInAction } from "./actions";
+import { Button } from "@/components/ui/button";
+import Link from "next/link";
 
 const signInSchema = z.object({
   email: z.string().email(),
@@ -91,6 +93,11 @@ export default function SignIn() {
           </LoaderButton>
         </form>
       </Form>
+      <div className="flex justify-end py-2">
+        <Button variant="link" className="ml-auto">
+          <Link href={"/sign-in/forgot-password"}>Forgot password?</Link>
+        </Button>
+      </div>
     </div>
   );
 }

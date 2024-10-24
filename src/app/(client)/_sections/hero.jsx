@@ -22,7 +22,7 @@ export default function Hero() {
 
   const handleInputChange = (e) => {
     setInputValue(e.target.value);
-    setIsDropdownOpen(true); // Open the dropdown when typing
+    setIsDropdownOpen(true);
   };
 
   const handleClickOutside = (e) => {
@@ -63,17 +63,19 @@ export default function Hero() {
   }, []);
 
   return (
-    <section>
-      <Container className="py-4  md:py-4 lg:py-4">
-        <div className="flex flex-col gap-4">
-          <h3 className="text-xl">
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Cum ipsam
+    <section id="hero" className="">
+      <div className="overlay"></div>
+      <Container className="py-4  md:py-4 lg:py-4 relative z-30 text-primary-foreground">
+        <div className="flex flex-col gap-6 h-[460px] justify-center">
+          <h3 className="sm:text-xl  hidden sm:block">
+            Discover interestiing scholarship opportunities
           </h3>
-          <h1 className="text-4xl text-header font-bold">
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Natus
-            provident laboriosam, ex adipisci veniam, nulla atque aspernatur
+          <h1 className="sm:text-2xl md:text:4xl text-xl font-bold text-white">
+            Explore our curated collection of the best scholarships for
+            Ethiopians, complete with video guides to help you navigate the
+            application process{" "}
           </h1>
-          <div className="flex gap-4 items-center justify-center relative mt-6">
+          <div className="flex gap-4 items-center  relative mt-6">
             <div className="max-w-96 w-full dropdown">
               <Input
                 ref={inputRef}
@@ -81,7 +83,7 @@ export default function Hero() {
                 onChange={handleInputChange}
                 onClick={() => setIsDropdownOpen(!isDropdownOpen)}
                 placeholder="Select a country where you want to study"
-                className="max-w-96 w-full"
+                className="max-w-96 w-full placeholder:text-gray-400"
               />
               {isDropdownOpen && (
                 <ul className="absolute border mt-1 bg-white rounded shadow-lg max-h-80 max-w-96 overflow-auto  text-start px-4 top-12 w-full py-2">
@@ -90,7 +92,7 @@ export default function Hero() {
                       <li
                         key={option.value}
                         onClick={() => handleOptionSelect(option)}
-                        className="p-2 cursor-pointer hover:bg-gray-200"
+                        className="p-2 cursor-pointer hover:bg-gray-200 text-foreground"
                       >
                         {option.label}
                       </li>
@@ -109,6 +111,13 @@ export default function Hero() {
                 Search
               </Link>
               <Search className="icon-lg sm:hidden" />
+            </Button>
+
+            <Button
+              variant="outline"
+              className="ml-6 text-secondary border-secondary hover:bg-secondary hover:text-secondary-foreground hidden md:block"
+            >
+              <Link href={"/scholarships"}>Explore videos</Link>
             </Button>
           </div>
         </div>

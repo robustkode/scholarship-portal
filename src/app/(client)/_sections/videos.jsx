@@ -14,7 +14,8 @@ const cachedGuides = cache(
 
 export default async function Guides() {
   return (
-    <Container>
+    <Container className={"py-8"}>
+      <h3 className="section-header">Guiding Videos</h3>
       <Suspense fallback={<div>Loading...</div>}>
         <GuidesSuspense />
       </Suspense>

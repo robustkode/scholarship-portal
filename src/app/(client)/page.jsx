@@ -1,9 +1,9 @@
 import Hero from "./_sections/hero";
-import Populars from "./_sections/populars";
 import Videos from "./_sections/videos";
 import PopularCountries from "./_sections/popular-countries";
 import Blogs from "./_sections/blogs";
 import RecentScholarships from "./_sections/recent-scholarships";
+import PopularScholarships from "./_sections/populars";
 
 export const dynamic = "force-static";
 
@@ -20,7 +20,7 @@ export default function Home() {
     <main>
       <Hero />
       <RecentScholarships />
-      <Populars />
+      <PopularScholarships />
       <Videos />
       <PopularCountries />
       <Blogs />

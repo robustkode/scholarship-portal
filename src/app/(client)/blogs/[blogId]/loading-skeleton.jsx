@@ -1,8 +1,9 @@
+import Container from "@/components/container";
 import { Skeleton } from "@/components/ui/skeleton";
 
 export default function Loading() {
   return (
-    <div className="flex flex-col gap-4">
+    <Container className="flex flex-col gap-4 my-12">
       <Skeleton className="h-10" />
       <Skeleton className="h-80" />
       <div className="flex flex-wrap gap-2">
@@ -12,6 +13,6 @@ export default function Loading() {
       </div>
       <Skeleton className="h-80" />
       <Skeleton className="h-96" />
-    </div>
+    </Container>
   );
 }

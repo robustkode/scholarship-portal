@@ -1,8 +1,6 @@
 import Container from "@/components/container";
-import BlogCard from "./blog-card";
-import { fetchBlogs } from "@/data-access/blogs";
-import { cache, nCache } from "@/lib/cache";
-import Link from "next/link";
+import { cache } from "@/lib/cache";
+
 import { Suspense } from "react";
 import ScholarshipCard from "@/components/scholarship-card";
 import { fetchScholarships } from "@/data-access/scholarships";
@@ -13,13 +11,13 @@ const cachedPopulars = cache(
     return await fetchScholarships();
   },
   ["home-populars"],
-  { revalidate: 2, tag: ["home-populars"] } //edit this one hour
+  { revalidate: 60 * 60, tag: ["home-populars"] } //edit this one hour
 );
 
-export default async function PopularCountries() {
+export default async function PopularScholarships() {
   return (
-    <section className="bg-gray-100 pb-6 ">
-      <Container>
+    <section className="bg-gray-100 pb-6  my-12 ">
+      <Container className="py-12">
         <h3 className="section-header">High paying scholarships</h3>
         <Suspense
           fallback={
@@ -48,7 +46,6 @@ async function CountriesSuspense() {
   }
 
   return (
-    // <div className="flex flex-wrap gap-8 justify-start">
     <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-8 justify-center">
       {scholarships.map((b) => (
         <ScholarshipCard {...b} key={b.id} />
@@ -56,19 +53,3 @@ async function CountriesSuspense() {
     </div>
   );
 }
-
-// async function PayingsSuspense() {
-//   const scholarships = await cachedRecents();
-//   // if (!scholarships) {
-//   //   return <p>No scholarships yet!</p>;
-//   // }
-//   return (
-//     // <div className="flex flex-wrap gap-8 justify-center">
-//     //   {scholarships.map((b) => (
-//     //     <div key={b.id} className="min-w-64">
-//     //     </div>
-//     //   ))}
-//     // </div>
-//     <p>oops</p>
-//   );
-// }

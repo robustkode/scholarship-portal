@@ -9,7 +9,7 @@ export default function AdminNavbar({ params }) {
   let activeRoute = pathname.split("/")[2];
 
   return (
-    <nav className="bg-primary-lig py-4">
+    <nav className="bg-primary-lig py-4 mb-4">
       <Container as="div">
         <ul className="flex flex-wrap items-center justify-center gap-6 text-primary-drk">
           <li

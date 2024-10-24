@@ -13,6 +13,7 @@ import { notFound } from "next/navigation";
 import { Suspense } from "react";
 import Loading from "./loading";
 import { cache } from "@/lib/cache";
+import NavigationCard from "@/components/navigation-card";
 
 export const dynamic = "force-static";
 
@@ -48,10 +49,20 @@ export async function generateMetadata({ params }) {
 
 export default async function Blog({ params }) {
   return (
-    <main className="pt-8">
-      <Suspense fallback={<Loading />}>
-        <BlogSuspense params={params} />
-      </Suspense>
+    <main className="py-6">
+      <Container as="div" className={"py-4 flex justify-end"}>
+        <NavigationCard id={params.blogId} />
+      </Container>
+      <Container className={"grid lg:grid-cols-5 gap-8"}>
+        <div className="lg:col-span-4">
+          <Suspense fallback={<Loading />}>
+            <BlogSuspense params={params} />
+          </Suspense>
+        </div>
+        <aside className="bg-primary-lig rounded-sm lg:my-8 mt-8 flex justify-center items-center h-32 lg:h-auto w-[100%]  order-1 md:order-2">
+          Some content
+        </aside>
+      </Container>
     </main>
   );
 }

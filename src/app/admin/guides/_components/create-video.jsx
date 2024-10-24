@@ -26,7 +26,7 @@ const videoSchema = z.object({
   tag: z.string().min(3, { message: "Too short" }),
   scholarshipId: z.string().optional(),
 });
-export default function VideoForm({ data, page }) {
+export default function VideoForm({ data, page, setCollapsed }) {
   const { toast } = useToast();
   const form = useForm({
     mode: "onChange",
@@ -53,6 +53,7 @@ export default function VideoForm({ data, page }) {
       },
       onSuccess() {
         form.reset();
+        setCollapsed(false);
         toast({
           title: data
             ? "Video updated successfuly."

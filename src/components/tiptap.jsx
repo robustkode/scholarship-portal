@@ -10,8 +10,7 @@ import ListItem from "@tiptap/extension-list-item";
 import OrderedList from "@tiptap/extension-ordered-list";
 import { useCallback } from "react";
 
-export default function TipTap({ content, onChange, height = 300 }) {
-  const clas = `min-h-[${height}px] py-4`;
+export default function TipTap({ content, onChange, height = 700 }) {
   const editor = useEditor({
     extensions: [
       StarteKit.configure(),
@@ -29,7 +28,7 @@ export default function TipTap({ content, onChange, height = 300 }) {
     content: content,
     editorProps: {
       attributes: {
-        class: `min-h-[${height}px] py-4`,
+        class: `min-h-[300px] py-4 w-[100%]`,
       },
     },
     onUpdate({ editor }) {
@@ -38,9 +37,9 @@ export default function TipTap({ content, onChange, height = 300 }) {
   });
 
   return (
-    <div className="flex flex-col justify-stretch">
+    <div className="flex flex-col w-full">
       <Toolbar editor={editor} />
-      <div className={`border border-gray-200 mb-4 prose prose-lg`}>
+      <div className={`border border-gray-200 mb-4 prose-full`}>
         <EditorContent editor={editor} />
       </div>
     </div>

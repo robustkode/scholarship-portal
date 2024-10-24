@@ -55,6 +55,13 @@ export default function Scholarships() {
   return (
     <main>
       <Container>
+        <div className="flex justify-end">
+          <Button className="ml-auto" variant="outline">
+            <Link href={"/admin/scholarships/create"}>
+              Create a scholarship
+            </Link>
+          </Button>
+        </div>
         {isPending ? (
           <div className="mt-8 flex flex-wrap gap-8 p-8">
             {[...Array(6)].map((_, i) => (
@@ -87,13 +94,13 @@ export default function Scholarships() {
                 {page.data?.map((d) => (
                   <div key={d.id} className="relative max-w-96">
                     <ScholarshipCard {...d} />
-                    <div className="right-4 top-4 absolute bg-primary-lig rounded-full">
+                    <div className="right-2 top-2 absolute bg-secondary rounded-full shadow-lg">
                       <Button
                         variant="ghost"
                         className="p-2 hover:bg-primary-lig rounded-full"
                       >
                         <Link href={`/admin/scholarships/${d.id}?page=${i}`}>
-                          <Pencil className="icon-lg" />
+                          <Pencil className="icon-lg text-secondary-foreground" />
                         </Link>
                       </Button>
                     </div>

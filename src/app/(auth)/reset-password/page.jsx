@@ -37,9 +37,7 @@ export default function ResetPasswordPage({ searchParams }) {
   const form = useForm({
     resolver: zodResolver(schema),
     defaultValues: {
-      password: "12345678",
       token: searchParams.token,
-      passwordConfirmation: "12345678",
     },
   });
 

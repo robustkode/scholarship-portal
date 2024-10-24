@@ -67,7 +67,7 @@ export default function Guides() {
             </div>
 
             <div className="flex justify-center w-full">
-              <VideoForm />
+              <VideoForm setCollapsed={setToggle} />
             </div>
           </div>
         ) : (

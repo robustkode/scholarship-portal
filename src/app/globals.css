@@ -35,7 +35,7 @@
     --primary: 201 99% 31%;
     --primary-1ig: 201 45% 72%;
     --primary-drk: 200 100% 9%;
-    --primary-foreground: 201 3% 86%;
+    --primary-foreground: 201 3% 96%;
 
     --secondary: 28 92% 54%;
     --secondary-lig: 28 86% 79%;
@@ -118,12 +118,12 @@ html {
   @apply w-8 h-8;
 }
 
-section {
+.section {
   @apply my-12;
 }
 
 .section-header {
-  @apply text-header sm:text-3xl text-xl text-start py-8 w-full font-bold;
+  @apply text-header sm:text-3xl text-xl text-start pb-8 w-full font-bold;
 }
 
 .page-header {
@@ -135,5 +135,33 @@ section {
 }
 
 main {
-  @apply min-h-[67vh] py-8;
+  @apply min-h-[70vh];
+}
+
+#hero {
+  background-image: url("../../public/student.jpg");
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  position: relative;
+  height: 490px;
+}
+
+#hero .overlay {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: radial-gradient(
+    circle,
+    rgba(0, 0, 0, 0.4) 10%,
+    rgba(0, 23, 59, 0.8) 40%
+  );
+  z-index: 1;
+}
+
+.vertical-nav {
+  z-index: 100;
 }

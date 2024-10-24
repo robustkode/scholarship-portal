@@ -17,7 +17,7 @@ const cachedBlogs = cache(
 export default async function Blogs() {
   return (
     <section>
-      <Container>
+      <Container as="div" className="py-12">
         <h3 className="section-header">Blogs</h3>
 
         <Suspense
