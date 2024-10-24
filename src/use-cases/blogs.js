@@ -5,6 +5,7 @@ import {
   fetchBlogCoverImage,
   fetchBlogs,
   fetchBlogsCard,
+  getBlogByTitle,
   updateBlog,
 } from "@/data-access/blogs";
 import { AuthenticationError, NotFoundError } from "./errors";
@@ -18,6 +19,10 @@ import { assertModerator, isModerator } from "./authorization";
 export async function createBlogUseCase(values) {
   await assertModerator();
   const { tags, ...rest } = values;
+  const blog = await getBlogByTitle(values.title);
+  if (blog) {
+    throw new NotFoundError("A blog with similar title exists.");
+  }
   const id = await createBlog(rest);
   let tagsArray;
   try {

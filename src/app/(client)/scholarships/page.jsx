@@ -52,7 +52,6 @@ export default function Scholarships() {
     queryKey: ["scholarships", dval],
     queryFn: () => fetchFilteredScholarships(dval),
     placeholderData: keepPreviousData,
-    //! change this
     staleTime: 60 * 60 * 60,
   });
 

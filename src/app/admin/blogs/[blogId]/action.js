@@ -45,5 +45,6 @@ export const updateBlogAction = authenticatedAction
     await updateBlogUseCase(input.id, values);
     revalidateTag("latest-blogs");
     revalidatePath("/");
+    revalidatePath("/blogs/" + input.id);
     redirect("/blogs/" + input.id);
   });

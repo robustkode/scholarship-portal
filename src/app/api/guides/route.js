@@ -1,13 +1,17 @@
 import { fetchVideos } from "@/data-access/videos";
 import { PublicError } from "@/use-cases/errors";
 import { useSearchParams } from "next/navigation";
+import * as z from "zod";
+const schema = z.object({
+  page: z.coerce.number(),
+});
 
 const PAGE_SIZE = 10;
 export const GET = async (req) => {
   try {
-    //! sanitize page
     const page = req.nextUrl.searchParams.get("pageParam");
-    const videos = await fetchVideos(page, PAGE_SIZE);
+    const safePage = schema.parse({ page });
+    const videos = await fetchVideos(safePage, PAGE_SIZE);
     return new Response(JSON.stringify(videos));
   } catch (error) {
     const isAllowedError = error instanceof PublicError;

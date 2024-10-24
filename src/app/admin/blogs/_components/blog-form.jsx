@@ -117,7 +117,6 @@ export default function BlogForm({ data, page }) {
     }
   }
 
-  //! title must be uniq, so handle error message
   return (
     <main className="my-12">
       <Container>

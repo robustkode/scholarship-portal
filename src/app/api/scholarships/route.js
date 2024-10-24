@@ -6,6 +6,7 @@ import {
 } from "@/data-access/scholarships";
 import { SCHOLARSHIPS_PAGE_SIZE } from "@/config";
 import { PublicError } from "@/use-cases/errors";
+import * as z from "zod";
 
 export const POST = async (req) => {
   try {
@@ -36,12 +37,15 @@ export const POST = async (req) => {
   }
 };
 
+const schema = z.object({
+  page: z.coerce.number(),
+});
 const PAGE_SIZE = 10;
 export const GET = async (req) => {
   try {
-    //! sanitize page
     const page = req.nextUrl.searchParams.get("pageParam");
-    const videos = await fetchScholarships(PAGE_SIZE, "createdAt", page);
+    const safePage = schema.parse({ page });
+    const videos = await fetchScholarships(PAGE_SIZE, "createdAt", safePage);
     return new Response(JSON.stringify(videos));
   } catch (error) {
     const isAllowedError = error instanceof PublicError;

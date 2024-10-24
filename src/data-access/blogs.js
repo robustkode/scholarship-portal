@@ -85,3 +85,12 @@ export async function fetchBlogsCount() {
     .from(blogs);
   return c;
 }
+
+export async function getBlogByTitle(title) {
+  return await db.query.blogs.findFirst({
+    columns: {
+      id: true,
+    },
+    where: eq(blogs.title, title),
+  });
+}

@@ -82,7 +82,8 @@ export const updateScholarshipAction = authenticatedAction
 
     values["userId"] = ctx.user.id;
     await updateScholarshipUseCase(input.id, values);
-    revalidateTag("home-recent-scholarships");
-    revalidatePath("/");
+    // revalidateTag("home-recent-scholarships");
+    // revalidatePath("/");
+    revalidatePath("/scholarships/" + input.id);
     redirect("/scholarships/" + input.id);
   });

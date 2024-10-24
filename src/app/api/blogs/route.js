@@ -4,12 +4,8 @@ import * as z from "zod";
 const PAGE_SIZE = 10;
 export const GET = async (req) => {
   try {
-    //! sanitize page  and check page is a number
-
     let page = req.nextUrl.searchParams.get("pageParam");
-    page = parseInt(page);
-    const safePage = schema.safeParse({ page });
-
+    const safePage = schema.parse({ page });
     const blogs = await fetchBlogs(safePage, PAGE_SIZE);
     return new Response(JSON.stringify(blogs));
   } catch (error) {
@@ -28,5 +24,5 @@ export const GET = async (req) => {
 };
 
 const schema = z.object({
-  page: z.number(),
+  page: z.coerce.number(),
 });

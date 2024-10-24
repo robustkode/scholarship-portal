@@ -3,7 +3,6 @@ import { PublicError } from "@/use-cases/errors";
 
 export const GET = async () => {
   try {
-    //! sanitize page
     const populars = await fetchPopulars();
     return new Response(JSON.stringify(populars));
   } catch (error) {

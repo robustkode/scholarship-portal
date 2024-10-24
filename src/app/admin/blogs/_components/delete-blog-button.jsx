@@ -31,8 +31,8 @@ export function DeleteBlogButton({ type = "submit" }) {
         description: "You left this group.",
       });
     },
-    //! on error close alert dialoag and show not found error
     onError({ err }) {
+      setIsOpen(false);
       toast({
         title: "Uh oh",
         variant: "destructive",

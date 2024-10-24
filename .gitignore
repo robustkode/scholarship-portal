@@ -41,4 +41,4 @@ next-env.d.ts
 ./note.md
 ./next.md
 ./sqlite.bak.db
-./sqlite.db
+sqlite.db

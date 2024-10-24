@@ -79,13 +79,14 @@ export async function createScholarship(values) {
       const filTags = tags.map((t) => {
         return { tag: t, scholarshipId: id };
       });
-      //! add ononconflict sch.id and tags.tag
-      await db.insert(scholarshipTags).values([...filTags]);
+      await db
+        .insert(scholarshipTags)
+        .values([...filTags])
+        .onConflictDoNothing();
     }
 
     if (countries.length) {
       const filHosts = countries.map((h) => {
-        // return { country: h, scholarshipId: id };
         return { country: h, continent: "europe", scholarshipId: id };
       });
       await db.insert(scholarshipHosts).values([...filHosts]);
@@ -144,14 +145,12 @@ export async function deleteScholarship(id) {
 }
 
 export async function updateScholarship(id, values) {
-  //! check if the scholarship exists
   const { degrees, rDegrees, countries, rCountries, tags, rTags, ...rest } =
     values;
 
-  // //! create transaction incase create tags, hosts, degrees fails
-  // //! better way to edit
+  //! create transaction incase create tags, hosts, degrees fails
 
-  // //! add continents
+  //! add continents
 
   await db.update(scholarships).set(rest).where(eq(scholarships.id, id));
 
@@ -161,8 +160,10 @@ export async function updateScholarship(id, values) {
       const filTags = tags.map((t) => {
         return { tag: t, scholarshipId: id };
       });
-      //! add ononconflict sch.id and tags.tag
-      await db.insert(scholarshipTags).values([...filTags]);
+      await db
+        .insert(scholarshipTags)
+        .values([...filTags])
+        .onConflictDoNothing();
     }
 
     if (countries.length) {
