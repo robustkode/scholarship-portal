@@ -9,6 +9,8 @@ import VideoCard from "@/components/video-card";
 import { Skeleton } from "@/components/ui/skeleton";
 import ErrorMessage from "@/components/error-message";
 import PagesHero from "@/components/pages-hero";
+import { hashPassword } from "@/lib/utils";
+import crypto, { randomUUID } from "crypto";
 
 const HERO = {
   header: "Guiding videos",
@@ -45,6 +47,12 @@ export default function Guides() {
       fetchNextPage();
     }
   }, [inView, fetchNextPage, isError]);
+  // const generate = async () => {
+  //   const salt = crypto.randomBytes(128).toString("base64");
+  //   const passwordHash = await hashPassword("123456", salt);
+  //   const id = randomUUID();
+  //   console.log({ salt, passwordHash, id });
+  // };
 
   return (
     <main>

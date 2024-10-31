@@ -1,1 +1,0 @@
-ALTER TABLE `blogs` DROP COLUMN `tags`;

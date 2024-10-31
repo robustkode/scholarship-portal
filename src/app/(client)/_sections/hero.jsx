@@ -70,7 +70,7 @@ export default function Hero() {
           <h3 className="sm:text-xl  hidden sm:block">
             Discover interestiing scholarship opportunities
           </h3>
-          <h1 className="sm:text-2xl md:text:4xl text-xl font-bold text-white">
+          <h1 className="sm:text-2xl md:text-4xl text-xl font-bold text-white line-relaxed">
             Explore our curated collection of the best scholarships for
             Ethiopians, complete with video guides to help you navigate the
             application process{" "}

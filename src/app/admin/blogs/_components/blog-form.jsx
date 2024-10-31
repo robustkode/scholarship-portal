@@ -99,6 +99,7 @@ export default function BlogForm({ data, page }) {
       }
       queryClient.invalidateQueries(["blog", data.id]);
     } else {
+      console.log(valuesWithImage);
       await execute(valuesWithImage);
       try {
         queryClient.setQueryData(["blogs"], (old) => {

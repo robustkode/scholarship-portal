@@ -29,7 +29,17 @@ export async function hashPassword(plainTextPassword, salt) {
   });
 }
 
-const UPPERCASEWORDS = ["phd", "usa", "uae"];
+export function getLabel(val, object) {
+  try {
+    const valList = val.split(",");
+    const labelList = valList.map((v) => {
+      return object.find((obj) => obj.value === v).label;
+    });
+    return labelList.join(", ");
+  } catch (_) {
+    return val;
+  }
+}
 export function capitalizeStringArray(
   string,
   separator = ",",
@@ -41,9 +51,6 @@ export function capitalizeStringArray(
   try {
     let l = string.split(separator);
     l = l.map((w) => {
-      if (UPPERCASEWORDS.includes(w.toLowerCase())) {
-        return w.toUpperCase();
-      }
       return capitalize(w);
     });
     if (returnArray) {
@@ -91,7 +98,10 @@ export async function uploadImage(getUrl, file, toast) {
       mode: "cors",
     });
     return (
-      FILE_BASE_URL + urlRes[0]["fields"].bucket + "/" + urlRes[0]["fields"].key
+      process.env.NEXT_PUBLIC_FILE_BASE_URL +
+      urlRes[0]["fields"].bucket +
+      "/" +
+      urlRes[0]["fields"].key
     );
   } catch (err) {
     toast({

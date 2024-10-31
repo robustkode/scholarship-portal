@@ -11,11 +11,9 @@ export default function FireModeratorButton({ tobefired }) {
     <DeleteButton
       action={handleFire}
       tobedeltedID={tobefired}
-      successMessage="Successfuly fired this bitch"
+      successMessage="Successfuly fired the moderator."
       title="Fire A moderator"
-      description=" Are you sure you want to delete this group? All your members will no
-            longer be able to view the group information and all data will be
-            removed from our system."
+      description=" Are you sure you want to fire  this moderator? This action cannot be undone."
       label="Fire"
     />
   );

@@ -42,36 +42,23 @@ export const createScholarshipAction = authenticatedAction
       tution: z.number(),
       openTime: z.number().optional(),
       deadline: z.number(),
-      about: z.string().min(3),
-      eligibility: z.string().min(3),
-      documents: z.string(),
-      benefits: z.string(),
-      howApply: z.string(),
+      content: z.string(),
       applyLink: z.union([z.string().length(0), z.string().url()]),
-      otherFields: z.string().optional(),
-      coverImage: z.instanceof(FormData),
       countries: z.string(),
       tags: z.array(z.string()),
       degrees: z.array(z.enum(["bh", "ms", "ph", "ot"])),
       countries: z.array(z.string()),
+      about: z.string(),
+      currency: z.string(),
     })
   )
   .handler(async ({ input, ctx }) => {
-    const file = input.coverImage.get("file");
-    //const url = await uploadImageUseCase(file, SCHOLARSHIP_IMAGE_DIR);
-    const url = "";
     const id = await createScholarshipUseCase({
       ...input,
-      coverImage: "mnm",
       userId: ctx.user.id,
     });
-    // console.log({
-    //   ...input,
-    //   coverImage: "mnm",
-    //   userId: ctx.user.id,
-    // });
+
     revalidateTag("home-recent-scholarships");
     revalidatePath("/");
     redirect("/scholarships/" + id);
-    //revalidatePath(`/dashboard/groups/${input.groupId}/settings`);
   });

@@ -5,7 +5,7 @@ export const moderatorRole = 2;
 export const adminRole = 3;
 export const afterLoginUrl = "/";
 export const hashIterations = 10000;
-export const applicationName = "sch";
+export const applicationName = "Scholarship portal";
 
 export const DEFAULT_OPENGRAPH_IMAGE_URL =
   "https://localhost:9000/my-bucket/opengraph/default";

@@ -24,7 +24,6 @@ export default function DropImage({ img, setImg }) {
     } catch (_) {}
     setImg(null);
   };
-  console.log(img, isValidURL(img), img?.preview, "drop");
 
   return (
     <div className="mb-4">

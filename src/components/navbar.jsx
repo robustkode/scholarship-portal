@@ -92,7 +92,7 @@ export default function Navbar() {
                   "h-8 w-fit"
                 )}
               >
-                <Link href="/blogs">Blog</Link>
+                <Link href="/blogs">Blogs</Link>
               </li>
 
               <li className="ml-auto sm:block hidden">
@@ -141,7 +141,7 @@ export default function Navbar() {
                   )}
                 >
                   <Link href="/blogs" className="small-nav-link">
-                    Blog
+                    Blogs
                   </Link>
                 </li>
 

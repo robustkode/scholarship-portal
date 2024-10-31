@@ -18,7 +18,7 @@ const cachedBlogs = cache(
     return await fetchBlogsCardUseCase();
   },
   ["blogs"],
-  { revalidate: 60 * 60 * 24, tag: ["blogs", "blogs-page"] }
+  { revalidate: 60 * 60 * 1, tag: ["blogs", "blogs-page"] }
 );
 
 export default async function Blogs() {
@@ -40,7 +40,7 @@ export default async function Blogs() {
           </Suspense>
         </div>
         <aside className="bg-primary-lig rounded-sm lg:my-8 mt-8 flex justify-center items-center h-32 lg:h-auto w-[100%]  order-1 md:order-2">
-          Some content
+          Ad
         </aside>
       </Container>
     </main>

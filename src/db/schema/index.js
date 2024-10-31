@@ -22,6 +22,18 @@ export const accountTokens = sqliteTable("account_tokens", {
   tokenExpiresAt: integer("token_expires_at", { mode: "timestamp" }).notNull(),
 });
 
+export const resetTokens = sqliteTable("reset_tokens", {
+  id: text("id", { length: 36 })
+    .primaryKey()
+    .$defaultFn(() => randomUUID()),
+  userId: text("user_id")
+    .references(() => users.id, { onDelete: "cascade" })
+    .unique()
+    .notNull(),
+  token: text("token"),
+  tokenExpiresAt: integer("token_expires_at", { mode: "timestamp" }).notNull(),
+});
+
 export const sessions = sqliteTable("sessions", {
   id: text("id", { length: 36 })
     .primaryKey()
@@ -35,44 +47,6 @@ export const sessions = sqliteTable("sessions", {
   expiresAt: integer("expires_at").notNull(),
 });
 
-// export const resetTokens = sqliteTable("reset_tokens", {
-//   id: text("id", { length: 36 })
-//     .primaryKey()
-//     .$defaultFn(() => randomUUID()),
-//   userId: text("user_id")
-//     .references(() => users.id, { onDelete: "cascade" })
-//     .unique()
-//     .notNull(),
-//   token: text("token"),
-//   tokenExpiresAt: integer("token_expires_at", { mode: "timestamp" }).notNull(),
-// });
-
-// export const verifyEmailTokens = sqliteTable("verify_email_tokens", {
-//   id: text("id", { length: 36 })
-//     .primaryKey()
-//     .$defaultFn(() => randomUUID()),
-//   userId: text("user_id")
-//     .references(() => users.id, { onDelete: "cascade" })
-//     .unique()
-//     .notNull(),
-//   token: text("token"),
-//   tokenExpiresAt: integer("token_expires_at", { mode: "timestamp" }).notNull(),
-// });
-
-// //
-
-// export const accounts = sqliteTable("accounts", {
-//   id: text("id", { length: 36 })
-//     .primaryKey()
-//     .$defaultFn(() => randomUUID()),
-//   userId: text("user_id")
-//     .references(() => users.id, { onDelete: "cascade" })
-//     .unique()
-//     .notNull(),
-//   : text("").notNull(),
-//   role: integer("role"),
-// });
-
 export const blogs = sqliteTable("blogs", {
   id: text("id", { length: 36 })
     .primaryKey()
@@ -81,6 +55,7 @@ export const blogs = sqliteTable("blogs", {
     .references(() => users.id, { onDelete: "set default" })
     .notNull()
     .$default("place-holder-id"),
+  //!!
   title: text("title").unique().notNull(),
   coverImage: text("cover_image"),
   content: text("content").notNull(),
@@ -106,26 +81,17 @@ export const scholarships = sqliteTable("scholarships", {
   openTime: integer("openTime"),
   deadline: integer("deadline"),
   about: text("about").notNull(),
-  eligibility: text("eligibility"),
-  documents: text("documents"),
-  benefits: text("benefits"),
-  howApply: text("how_apply"),
-  applyLink: text("aaply_link"),
-  otherFields: text("other_fields"),
+  // eligibility: text("eligibility"),
+  // documents: text("documents"),
+  // benefits: text("benefits"),
+  // howApply: text("how_apply"),
+  applyLink: text("apply_link"),
+  // otherFields: text("other_fields"),
+  content: text("content").notNull(),
   createdAt: integer("created_at")
     .notNull()
     .$defaultFn(() => Date.now()),
 });
-
-// // export const scholarshipsMetaData = sqliteTable("scholarships_meta_data", {
-// //   id: text("id", { length: 36 })
-// //     .primaryKey()
-// //     .$defaultFn(() => randomUUID()),
-// //   scholarshipId: text("scholarship_id")
-// //     .references(() => users.id, { onDelete: "cascade" })
-// //     .unique()
-// //     .notNull(),
-// // });
 
 export const scholarshipHosts = sqliteTable("scholarship_hosts", {
   id: text("id", { length: 36 })
@@ -150,13 +116,6 @@ export const ScholarshipDegrees = sqliteTable("scholarship_degrees", {
     })
     .notNull(),
 });
-
-// export const country = sqliteTable("country", {
-//   id: text("id", { length: 36 })
-//     .primaryKey()
-//     .$defaultFn(() => randomUUID()),
-//   name: text("name").notNull(),
-// });
 
 export const popularCountries = sqliteTable("popular_countries", {
   id: text("id", { length: 36 })
@@ -205,8 +164,3 @@ export const videos = sqliteTable("videos", {
     .notNull()
     .$defaultFn(() => Date.now()),
 });
-
-// //@2 create country table and many to many with scholarships, and save popularity in
-// // a column
-
-// //@2 use lists insetead of tables in tags, countries

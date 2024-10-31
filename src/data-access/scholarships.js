@@ -70,9 +70,7 @@ export async function fetchScholarshipsMetadata() {
 
 export async function createScholarship(values) {
   const { degrees, countries, tags, ...rest } = values;
-  //! create transaction incase create tags, hosts, degrees fails
   const [{ id }] = await db.insert(scholarships).values(rest).returning();
-  //! add continents
 
   try {
     if (tags.length) {
@@ -87,7 +85,7 @@ export async function createScholarship(values) {
 
     if (countries.length) {
       const filHosts = countries.map((h) => {
-        return { country: h, continent: "europe", scholarshipId: id };
+        return { country: h, scholarshipId: id };
       });
       await db.insert(scholarshipHosts).values([...filHosts]);
     }
@@ -248,7 +246,9 @@ export async function fetchFilteredScholarships({
   query.offset(parseInt(pageSize * (page - 1)));
 
   const countQuery = db
-    .select({ count: count(scholarships.id) })
+    .select({ count: sql`count(distinct(${scholarships.id}))` })
+    //.select({ count: count(scholarships.id) })
+
     .from(scholarships)
     .leftJoin(
       scholarshipHosts,
@@ -257,7 +257,8 @@ export async function fetchFilteredScholarships({
     .leftJoin(
       ScholarshipDegrees,
       eq(scholarships.id, ScholarshipDegrees.scholarshipId)
-    );
+    )
+    // .groupBy(scholarships.id);
 
   if (Object.keys(conditions).length > 0) {
     countQuery.where(and(...Object.values(conditions)));
@@ -281,4 +282,22 @@ export async function fetchScholarshipsCount() {
     .select({ count: count(scholarships.id) })
     .from(scholarships);
   return c;
+}
+
+export async function getScholarshipMetaByName(name) {
+  return await db.query.scholarships.findFirst({
+    columns: {
+      id: true,
+    },
+    where: eq(scholarships.name, name),
+  });
+}
+
+export async function getScholarshipMetaById(id) {
+  return await db.query.scholarships.findFirst({
+    columns: {
+      id: true,
+    },
+    where: eq(scholarships.id, id),
+  });
 }

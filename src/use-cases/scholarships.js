@@ -11,16 +11,24 @@ import {
   fetchScholarship,
   fetchScholarshipImage,
   fetchScholarships,
+  getScholarshipMetaById,
+  getScholarshipMetaByName,
+  getScholarshipsMeta,
   updateScholarship,
 } from "@/data-access/scholarships";
 import { createUUID } from "@/util/uuid";
 import { MAX_UPLOAD_IMAGE_SIZE, MAX_UPLOAD_IMAGE_SIZE_IN_MB } from "@/config";
 import { uploadFileToBucket } from "@/lib/files";
-import { scholarships } from "@/db/schema/index.bak";
 import { assertModerator } from "./authorization";
 
 export async function createScholarshipUseCase(values) {
+  console.log(values, "values");
+
   await assertModerator();
+  const existedScholarship = await getScholarshipMetaByName(values.name);
+  if (existedScholarship) {
+    throw new NotFoundError("A scholarship is found with this name.");
+  }
   return await createScholarship(values);
 }
 
@@ -30,9 +38,16 @@ export async function fetchScholarshipUseCase(id) {
 
 export async function updateScholarshipUseCase(id, values) {
   await assertModerator();
-  //! check if the file exist before updating
-  // but since check in fetchBlofCoverImageusecase and not used this in other place wwe can skip
-
+  let existedScholarship = await getScholarshipMetaById(id);
+  if (!existedScholarship) {
+    throw new NotFoundError("No scholarship with the given id.");
+  }
+  existedScholarship = await getScholarshipMetaByName(values.name);
+  if (existedScholarship && existedScholarship.id !== id) {
+    throw new NotFoundError(
+      "A scholarship already existed with the given name."
+    );
+  }
   await updateScholarship(id, values);
 }
 

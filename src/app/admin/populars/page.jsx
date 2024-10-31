@@ -92,7 +92,7 @@ export default function Populars() {
       form.reset();
       queryClient.invalidateQueries(["populars"]);
       toast({
-        title: "Deleted country Sucessfully",
+        title: "Added country Sucessfully",
         variant: "success",
       });
     },
@@ -144,7 +144,7 @@ export default function Populars() {
   };
 
   return (
-    <main>
+    <main className="my-12">
       <Container>
         <Form {...form}>
           <form

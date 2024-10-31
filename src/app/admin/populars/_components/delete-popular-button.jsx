@@ -13,9 +13,7 @@ export default function PopularDeleteButton({ tobedeltedId }) {
       tobedeltedID={tobedeltedId}
       successMessage="Successfuly deleted the Country"
       title="Delete a popular "
-      description=" Are you sure you want to delete this video? All your members will no
-            longer be able to view the group information and all data will be
-            removed from our system."
+      description=" Are you sure you want to delete. This action cannot be undone."
       label={<span className="text-sm">Delete</span>}
     />
   );

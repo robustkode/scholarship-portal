@@ -13,9 +13,7 @@ export default function VideoDeleteButton({ tobedeltedId, page }) {
       tobedeltedID={tobedeltedId}
       successMessage="Successfuly deleted the video"
       title="Delete a Video"
-      description=" Are you sure you want to delete this video? All your members will no
-            longer be able to view the group information and all data will be
-            removed from our system."
+      description=" Are you sure you want to delete? This action cannot be undone."
       label="Delete"
     />
   );

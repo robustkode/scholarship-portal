@@ -3,6 +3,7 @@ import Container from "@/components/container";
 import ErrorMessage from "@/components/error-message";
 import { Button } from "@/components/ui/button";
 import { Skeleton } from "@/components/ui/skeleton";
+import { seed } from "@/db/seed";
 import { apiClient } from "@/lib/api-client";
 import { queryClient } from "@/lib/react-query";
 import { useQuery } from "@tanstack/react-query";
@@ -20,7 +21,7 @@ export default function AdminPanel() {
   });
 
   return (
-    <main className="bg-gray-100 py-8 min-h-[70vh]">
+    <main className="py-12 h-[80vh]">
       <Container as="div" className="flex flex-wrap gap-8">
         {isPending ? (
           <div className="flex flex-wrap gap-6 pt-12">
@@ -46,49 +47,64 @@ export default function AdminPanel() {
           </div>
         ) : (
           <section className="flex flex-wrap gap-4">
-            <div className="bg-white rounded-sm py-4 px-8 shdow-md  flex gap-8 items-center shadow-md">
+            <div className="bg-white rounded-sm border py-4 px-8 shdow-md  flex gap-8 items-center shadow-md ">
               <h3 className="header text-lg">
                 <span className="mr-2"> {data.schsCount} </span>
                 Scholarships
               </h3>
-              <Link href={"/admin/scholarships"}>
-                <Settings className="icon-lg text-primary" />
+              <Link
+                href={"/admin/scholarships"}
+                className="hover:bg-primary text-primary hover:text-primary-foreground p-1 rounded-full"
+              >
+                <Settings className="icon-lg" />
               </Link>
             </div>
-            <div className="bg-white rounded-sm py-4 px-8 shdow-md  flex gap-8 items-center shadow-md">
+            <div className="bg-white rounded-sm border py-4 px-8 shdow-md  flex gap-8 items-center shadow-md">
               <h3 className="header text-lg">
                 <span className="mr-2"> {data.blogsCount} </span>
                 Blogs
               </h3>
-              <Link href={"/admin/blogs"}>
-                <Settings className="icon-lg text-primary" />
+              <Link
+                href={"/admin/blogs"}
+                className="hover:bg-primary text-primary hover:text-primary-foreground p-1 rounded-full"
+              >
+                <Settings className="icon-lg" />
               </Link>
             </div>
-            <div className="bg-white rounded-sm py-4 px-8 shdow-md  flex gap-8 items-center shadow-md">
+            <div className="bg-white rounded-sm border py-4 px-8 shdow-md  flex gap-8 items-center shadow-md">
               <h3 className="header text-lg">
                 <span className="mr-2"> {data.moderatorsCount} </span>
                 Moderators
               </h3>
-              <Link href={"/admin/moderators"}>
-                <Settings className="icon-lg text-primary" />
+              <Link
+                href={"/admin/moderators"}
+                className="hover:bg-primary text-primary hover:text-primary-foreground p-1 rounded-full"
+              >
+                <Settings className="icon-lg" />
               </Link>
             </div>
-            <div className="bg-white rounded-sm py-4 px-8 shdow-md  flex gap-8 items-center shadow-md">
+            <div className="bg-white rounded-sm border py-4 px-8 shdow-md  flex gap-8 items-center shadow-md">
               <h3 className="header text-lg">
                 <span className="mr-2"> {data.guidesCount} </span>
                 Guiding videos
               </h3>
-              <Link href={"/admin/guides"}>
-                <Settings className="icon-lg text-primary" />
+              <Link
+                href={"/admin/guides"}
+                className="hover:bg-primary text-primary hover:text-primary-foreground p-1 rounded-full"
+              >
+                <Settings className="icon-lg" />
               </Link>
             </div>
-            <div className="bg-white rounded-sm py-4 px-8 shdow-md  flex gap-8 items-center shadow-md">
+            <div className="bg-white rounded-sm border py-4 px-8 shdow-md  flex gap-8 items-center shadow-md">
               <h3 className="header text-lg">
                 <span className="mr-2"> {data.popularsCount} </span>
                 Popular countries
               </h3>
-              <Link href={"/admin/populars"}>
-                <Settings className="icon-lg text-primary" />
+              <Link
+                href={"/admin/populars"}
+                className="hover:bg-primary text-primary hover:text-primary-foreground p-1 rounded-full"
+              >
+                <Settings className="icon-lg" />
               </Link>
             </div>
           </section>

@@ -36,7 +36,7 @@ function Calendar({ className, classNames, showOutsideDays = true, ...props }) {
         ),
         day: cn(
           buttonVariants({ variant: "ghost" }),
-          "h-8 w-8 p-0 font-normal aria-selected:opacity-100 text-muted"
+          "h-8 w-8 p-0 font-normal aria-selected:opacity-100 text-muted-foreground"
         ),
         day_range_start: "day-range-start",
         day_range_end: "day-range-end",
@@ -44,7 +44,7 @@ function Calendar({ className, classNames, showOutsideDays = true, ...props }) {
           "bg-primary text-primary-foreground hover:bg-primary hover:text-primary-foreground focus:bg-primary focus:text-primary-foreground",
         day_today: "bg-accent text-accent-foreground",
         day_outside:
-          "day-outside text-muted-foreground opacity-50  aria-selected:bg-accent/50 aria-selected:text-muted-foreground aria-selected:opacity-30",
+          "day-outside text-muted-foreground opacity-70  aria-selected:bg-accent/50 aria-selected:text-muted-foreground aria-selected:opacity-30",
         day_disabled: "text-muted-foreground opacity-50",
         day_range_middle:
           "aria-selected:bg-accent aria-selected:text-accent-foreground",

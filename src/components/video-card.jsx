@@ -1,7 +1,8 @@
 import { capitalizeStringArray, isValidURL } from "@/lib/utils";
 
 export default function VideoCard({ title, link, tag }) {
-  const tagsList = capitalizeStringArray(tag, ",", true);
+  // const tagsList = capitalizeStringArray(tag, ",", true);
+  const tagsList = tag ? tag.split(",") : [];
   return (
     <div>
       {isValidURL(link) ? (

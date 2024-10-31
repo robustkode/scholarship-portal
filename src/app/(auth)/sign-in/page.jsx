@@ -20,6 +20,7 @@ import { Terminal } from "lucide-react";
 import { signInAction } from "./actions";
 import { Button } from "@/components/ui/button";
 import Link from "next/link";
+import Container from "@/components/container";
 
 const signInSchema = z.object({
   email: z.string().email(),
@@ -30,7 +31,7 @@ export default function SignIn() {
 
   const form = useForm({
     resolver: zodResolver(signInSchema),
-    defaultValues: { email: "test@test.com", password: "123456" },
+    defaultValues: {},
   });
 
   function onSubmit(values) {
@@ -38,7 +39,7 @@ export default function SignIn() {
   }
 
   return (
-    <div>
+    <Container>
       <h1 className="mb-6 header text-2xl text-center">Sign in</h1>
       <Form {...form}>
         <form onSubmit={form.handleSubmit(onSubmit)}>
@@ -98,6 +99,6 @@ export default function SignIn() {
           <Link href={"/sign-in/forgot-password"}>Forgot password?</Link>
         </Button>
       </div>
-    </div>
+    </Container>
   );
 }

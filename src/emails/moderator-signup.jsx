@@ -16,7 +16,8 @@ import {
 } from "@react-email/components";
 import { applicationName } from "@/config";
 
-export const BASE_URL = process.env.HOST_NAME;
+export const BASE_URL = process.env.NEXT_PUBLIC_HOST_NAME;
+console.log(applicationName, BASE_URL, "email");
 
 export function ModeratorSignUpEmail({ token }) {
   return (
@@ -44,7 +45,7 @@ export function ModeratorSignUpEmail({ token }) {
 
                 <Text className="text-[14px] font-medium leading-[24px] text-black">
                   <Link
-                    href={`${BASE_URL}/reset-password?token=${token}`}
+                    href={`${BASE_URL}/sign-up?token=${token}`}
                     target="_blank"
                     className="text-[#2754C5] underline"
                   >

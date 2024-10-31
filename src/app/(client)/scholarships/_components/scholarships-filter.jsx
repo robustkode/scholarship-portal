@@ -174,7 +174,7 @@ function Main() {
               <ul className="flex gap-2 py-2 flex-wrap">
                 {filter.country.map((c, i) => (
                   <li
-                    className="px-2 py-1.5 bg-primary-lig w-fit rounded-sm flex  gap-2 items-center"
+                    className="px-2 py-1.5 bg-primary-lig w-fit rounded-sm flex  gap-2 items-center cursor-pointer"
                     key={c.value}
                   >
                     <Checkbox
@@ -230,7 +230,7 @@ function Main() {
                               payload: { category: "country", value: c },
                             });
                           }}
-                          className="cursor-pointer text-md"
+                          className="cursor-pointer text-md w-full"
                         >
                           {c.label}
                         </span>

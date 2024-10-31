@@ -74,7 +74,7 @@ export default function Moderators() {
   };
 
   return (
-    <main>
+    <main className="py-12">
       <Container className="" as="div">
         {!toggled ? (
           <div className="flex justify-end">

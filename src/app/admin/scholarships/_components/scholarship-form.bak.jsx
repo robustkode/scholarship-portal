@@ -55,7 +55,6 @@ import { CalendarIcon } from "lucide-react";
 import { Calendar } from "@/components/ui/calendar";
 import { format, getTime } from "date-fns";
 import { X } from "lucide-react";
-import { Textarea } from "@/components/ui/textarea";
 
 const ScholarshipSchema = z.object({
   id: z.string().optional(),
@@ -79,8 +78,12 @@ const ScholarshipSchema = z.object({
   ]),
 
   about: z.string().min(3, { message: "Too short" }),
-  content: z.string(),
+  eligibility: z.string().min(3, { message: "Too short" }),
+  documents: z.string(),
+  benefits: z.string(),
+  howApply: z.string(),
   applyLink: z.union([z.string().length(0), z.string().url()]),
+  otherFields: z.string().optional(),
   tags: z
     .string()
     .optional()
@@ -98,13 +101,14 @@ const ScholarshipSchema = z.object({
 });
 
 export default function ScholarshipForm({ data }) {
+  const [coverImg, setImgCoverImg] = useState(data?.coverImage || null);
   const [selectedCountries, setSelectedCountries] = useState(
     data?.countries ? data.countries.split(",") : []
   );
   const [selectedDegrees, setSelectedDegrees] = useState(
     data?.degrees ? data.degrees.split(",") : []
   );
-
+  // console.log(data, "data");
   const { toast } = useToast();
   const form = useForm({
     mode: "onchange",
@@ -117,19 +121,44 @@ export default function ScholarshipForm({ data }) {
           openTime: data.openTime == 0 ? "" : new Date(data.openTime),
           deadline: data.deadline == 0 ? "" : new Date(data.deadline),
           about: data.about,
-          content: data.content,
+          eligibility: data.eligibility,
+          documents: data.documents,
+          benefits: data.benefits,
+          howApply: data.howApply,
           applyLink: data.applyLink,
           id: data.id,
           tags: data.tags || "",
           countries: data.countries || "",
           degrees: data.degrees || "",
-          currency: data.currency || "$",
+          currency: data.currency || "",
         }
-      : {
+      : // : {
+        //     tags: "",
+        //     countries: "",
+        //     degrees: "",
+        //     currency: "$",
+        //     openTime: "",
+        //     deadline: "",
+        //   },
+        {
+          tags: "",
+          countries: "",
+          degrees: "",
           currency: "$",
-          openTime: 0,
-          deadline: 0,
-          tution: 0,
+          openTime: "",
+          deadline: "",
+          // about:
+          //   "Developed by the Ministry for Europe and Foreign Affairs, the France Excellence Europa scholarship program allows students from 26 European Union countries to obtain scholarships to study at the Master's level in a French institution of higher education.",
+          // benefits: "hey",
+          // documents: "oops",
+          // how: "kmem",
+          // name: "name",
+          // university: "university",
+          // tution: 9000,
+          // applyLink: "https://www.google.com",
+          // eligibility: "hsdafkjhaj",
+          // howApply: "dsfjahfjah",
+          // countries: "fr",
         },
   });
 
@@ -145,9 +174,8 @@ export default function ScholarshipForm({ data }) {
       },
       onSuccess() {
         toast({
-          title: data
-            ? "Scholarship updated successfully!"
-            : "Scholarship created successfully!",
+          title: "Scholarship deleted successfully!",
+          description: "Enjoy your session",
         });
       },
     }
@@ -167,7 +195,9 @@ export default function ScholarshipForm({ data }) {
   };
 
   function onSubmit(values) {
-    let ValuesExtended = { ...values };
+    const formData = new FormData();
+    formData.append("file", coverImg);
+    let valuesWithImage = { ...values, coverImage: formData };
     if (data) {
       const { addedItems: countries, removedItems: rCountries } = compare(
         data.countries,
@@ -182,8 +212,8 @@ export default function ScholarshipForm({ data }) {
         values.degrees
       );
 
-      ValuesExtended = {
-        ...ValuesExtended,
+      valuesWithImage = {
+        ...valuesWithImage,
         countries,
         tags,
         degrees,
@@ -191,11 +221,21 @@ export default function ScholarshipForm({ data }) {
         rDegrees,
         rTags,
       };
-      execute(ValuesExtended);
+      execute(valuesWithImage);
       return;
     }
-    console.log(ValuesExtended);
-    execute(ValuesExtended);
+    // e.preventDefault();
+    // const formData = new FormData(e.target); // 'e.target' is the form element
+
+    // // Get values from formData
+    // const values = {};
+    // formData.forEach((value, key) => {
+    //   values[key] = value;
+    // });
+    // const v = ScholarshipSchema.safeParse(values);
+    console.log(valuesWithImage);
+
+    execute(valuesWithImage);
   }
 
   return (
@@ -204,6 +244,7 @@ export default function ScholarshipForm({ data }) {
         <Form {...form}>
           {/* <form onSubmit={(e) => onSubmit(e)} className="px-4"> */}
           <form onSubmit={form.handleSubmit(onSubmit)} className="px-4">
+            {/* <DropImage img={coverImg} setImg={setImgCoverImg} /> */}
             <div className="grid md:grid-cols-2 gap-x-8">
               <FormField
                 control={form.control}
@@ -445,7 +486,6 @@ export default function ScholarshipForm({ data }) {
                 )}
               />
             </div>
-
             <div className="grid md:grid-cols-2 gap-x-8">
               <FormField
                 control={form.control}
@@ -533,8 +573,7 @@ export default function ScholarshipForm({ data }) {
                             selected={field.value}
                             onSelect={field.onChange}
                             disabled={(date) =>
-                              date > new Date("2030-01-01") ||
-                              date < new Date("2020-01-01")
+                              date > new Date("2030-01-01") || date < new Date()
                             }
                           />
                         </PopoverContent>
@@ -590,12 +629,12 @@ export default function ScholarshipForm({ data }) {
             <FormField
               control={form.control}
               name="about"
-              className="py-2 "
+              className="pt-2"
               render={({ field }) => (
                 <FormItem>
                   <FormLabel>About</FormLabel>
                   <FormControl>
-                    <Textarea {...field} className="h-48" />
+                    <TipTap content={field.value} onChange={field.onChange} />
                   </FormControl>
                   <FormMessage />
                 </FormItem>
@@ -604,16 +643,68 @@ export default function ScholarshipForm({ data }) {
 
             <FormField
               control={form.control}
-              name="content"
+              name="eligibility"
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel>Content</FormLabel>
+                  <FormLabel>Eligibility</FormLabel>
                   <FormControl>
-                    <TipTap
-                      content={field.value}
-                      onChange={field.onChange}
-                      height={1200}
-                    />
+                    <TipTap content={field.value} onChange={field.onChange} />
+                  </FormControl>
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
+
+            <FormField
+              control={form.control}
+              name="documents"
+              render={({ field }) => (
+                <FormItem>
+                  <FormLabel>Documents</FormLabel>
+                  <FormControl>
+                    <TipTap content={field.value} onChange={field.onChange} />
+                  </FormControl>
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
+
+            <FormField
+              control={form.control}
+              name="benefis"
+              render={({ field }) => (
+                <FormItem>
+                  <FormLabel>Benefits</FormLabel>
+                  <FormControl>
+                    <TipTap content={field.value} onChange={field.onChange} />
+                  </FormControl>
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
+
+            <FormField
+              control={form.control}
+              name="howApply"
+              render={({ field }) => (
+                <FormItem>
+                  <FormLabel>How to apply</FormLabel>
+                  <FormControl>
+                    <TipTap content={field.value} onChange={field.onChange} />
+                  </FormControl>
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
+
+            <FormField
+              control={form.control}
+              name="otherFields"
+              render={({ field }) => (
+                <FormItem>
+                  <FormLabel>Additional Notes</FormLabel>
+                  <FormControl>
+                    <TipTap content={field.value} onChange={field.onChange} />
                   </FormControl>
                   <FormMessage />
                 </FormItem>

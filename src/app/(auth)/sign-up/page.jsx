@@ -38,8 +38,6 @@ export default function SignUp({ searchParams }) {
   const form = useForm({
     resolver: zodResolver(signUpSchema),
     defaultValues: {
-      email: "moderator@test.com",
-      password: "123456",
       token: searchParams.token,
     },
   });
@@ -73,7 +71,7 @@ export default function SignUp({ searchParams }) {
               <FormItem>
                 <FormLabel>Password</FormLabel>
                 <FormControl>
-                  <Input {...field} />
+                  <Input {...field} type="password" />
                 </FormControl>
                 <FormMessage />
               </FormItem>

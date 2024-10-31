@@ -53,7 +53,7 @@ export default function Blog() {
   }, [inView, fetchNextPage, isError]);
 
   return (
-    <main>
+    <main className="py-12">
       <Container>
         <div className="flex justify-end">
           <Button as="div" variant="outline">

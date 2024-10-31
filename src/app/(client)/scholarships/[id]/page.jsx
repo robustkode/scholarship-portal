@@ -1,7 +1,7 @@
 import Container from "@/components/container";
 import ShareContent from "@/components/share-content";
 import { Button } from "@/components/ui/button";
-import { isValidURL } from "@/lib/utils";
+import { getLabel, isValidURL } from "@/lib/utils";
 import { fetchScholarshipUseCase } from "@/use-cases/scholarships";
 import { format } from "date-fns";
 import { Globe } from "lucide-react";
@@ -12,9 +12,10 @@ import { notFound } from "next/navigation";
 import { Suspense } from "react";
 import Loading from "../_components/loading";
 import { cache } from "@/lib/cache";
-
+import _ from "lodash";
+import { COUNTRIES, DEGREES } from "@/config";
 export const dynamic = "force-static";
-//? how to add tag  here
+
 const cachedScholarship = cache(async (params) => {
   return fetchScholarshipUseCase(params.id);
 }, []);
@@ -57,35 +58,12 @@ export default async function Scholarship({ params }) {
   );
 }
 
-const isEmpty = (field) => {
-  if (!field) return true;
-  const regex = /<\w+>(.+?)<\/\w+>/;
-  const match = field.match(regex);
-  if (!match) return true;
-  return false;
-};
 async function ScholarshipSusPense({ params }) {
   const scholarship = await cachedScholarship(params);
   if (!scholarship) notFound();
-  const {
-    about,
-    benefits,
-    eligibility,
-    documents,
-    howApply,
-    otherFields,
-    applyLink,
-    currency,
-    coverImage,
-  } = scholarship;
-  const dangerousContents = [
-    { label: "About", value: about },
-    { label: "Benefits", value: benefits },
-    { label: "Eligibility", value: eligibility },
-    { label: "Documents", value: documents },
-    { label: "How to apply", value: howApply },
-    { label: "", value: otherFields },
-  ];
+  const { about, content, applyLink, currency, countries, degrees } =
+    scholarship;
+  const countriesName = getLabel(countries, COUNTRIES);
 
   return (
     <>
@@ -99,9 +77,13 @@ async function ScholarshipSusPense({ params }) {
             <h1 className="text-3xl font-bold text-header">
               {scholarship.name}
             </h1>
-            <Button className="mt-4 w-fit" variant={"secondary"}>
-              <Link href={applyLink}>Apply</Link>
-            </Button>
+            {applyLink ? (
+              <Button className="mt-4 w-fit" variant={"secondary"}>
+                <Link href={""}>Apply</Link>
+              </Button>
+            ) : (
+              ""
+            )}
           </div>
           <div className="bg-white w-80 flex flex-col gap-4 rounded-sm px-4 py-4 ">
             <div className="flex items-center gap-8 border-b w-full pb-2">
@@ -111,7 +93,8 @@ async function ScholarshipSusPense({ params }) {
 
               <div className="flex flex-col">
                 <p className="text-primary-dark text-bold text-xl">
-                  {`${currency}${scholarship.tution}` || "No data"}
+                  {`${currency ? currency : "$"}${scholarship.tution}` ||
+                    "No data"}
                 </p>
                 <p className="text-muted text-small">Grant</p>
               </div>
@@ -123,7 +106,7 @@ async function ScholarshipSusPense({ params }) {
 
               <div className="flex flex-col">
                 <p className="text-primary-dark text-bold text-xl">
-                  {scholarship.country || "No data"}
+                  {countriesName || "Multiple countries"}
                 </p>
                 <p className="text-muted text-small">Country</p>
               </div>
@@ -145,37 +128,16 @@ async function ScholarshipSusPense({ params }) {
       </div>
       <Container as="div" className={"grid lg:grid-cols-5 gap-8"}>
         <section className="flex flex-col py-12 lg:col-span-4">
-          {coverImage && isValidURL(coverImage) ? (
-            <Image
-              src={coverImage}
-              height={100}
-              width={100}
-              alt="scholarship coverimage"
-            />
-          ) : (
-            ""
-          )}
-
-          <div className="flex flex-col">
-            {dangerousContents.map((content, i) =>
-              !isEmpty(content.value) ? (
-                <div className="" key={i}>
-                  <h3 className="text-header font-bold text-2xl pb-3  pt-6">
-                    {content.label}
-                  </h3>
-                  <div
-                    className="prose prose-lg"
-                    dangerouslySetInnerHTML={{ __html: content.value }}
-                  ></div>
-                </div>
-              ) : (
-                ""
-              )
-            )}
+          <div className="mb-2">{about}</div>
+          <div className="">
+            <div
+              className="prose prose-lg"
+              dangerouslySetInnerHTML={{ __html: content }}
+            ></div>
           </div>
         </section>
         <aside className="bg-primary-lig rounded-sm lg:my-8 mt-8 flex justify-center items-center h-32 lg:h-auto w-[100%]  order-1 md:order-2 mb-12">
-          Some content
+          Ad
         </aside>
       </Container>
 

@@ -19,6 +19,7 @@ import GroupPagination from "@/components/group-pagination";
 import { ScholarshipSkeleton } from "@/components/loading/scholarship-skeleton";
 import ErrorMessage from "@/components/error-message";
 import PagesHero from "@/components/pages-hero";
+import { SCHOLARSHIPS_PAGE_SIZE } from "@/config";
 
 const HERO = {
   header: "Find your ideal scholarships",
@@ -91,12 +92,17 @@ export default function Scholarships() {
     <main className="mb-16">
       <PagesHero header={HERO.header} description={HERO.description} />
       <Container as="div" className="py-12">
-        <div className="grid md:grid-cols-3 gap-4 w-full">
-          <Filter />
-          <div className="md:col-span-2 pb-16 bg-gray-100/40 rounded-sm">
+        {/* <div>{JSON.stringify(error)}</div> */}
+        <div className="grid md:grid-cols-4 gap-4 w-full">
+          <div className="md:col-span-1">
+            <Filter />
+          </div>
+          <div className="md:col-span-3 pb-16 bg-gray-100/40 rounded-sm">
             {data && data.scholarships?.length < totalCount ? (
               <div className="py-4">
-                <GroupPagination totalPages={Math.ceil(totalCount / 3)} />
+                <GroupPagination
+                  totalPages={Math.ceil(totalCount / SCHOLARSHIPS_PAGE_SIZE)}
+                />
               </div>
             ) : (
               ""
@@ -120,7 +126,12 @@ export default function Scholarships() {
                 <p className="section-header">{data.totalCount} scholarships</p>
                 <div className="flex flex-wrap gap-6">
                   {data?.scholarships.map((sch) => (
-                    <ScholarshipCard key={sch.id} {...sch} />
+                    <div
+                      key={sch.id}
+                      className="basis-72 shrink justify-between"
+                    >
+                      <ScholarshipCard {...sch} />
+                    </div>
                   ))}
                 </div>
               </div>

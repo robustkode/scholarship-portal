@@ -16,7 +16,7 @@ const cachedPopulars = cache(
 
 export default async function PopularScholarships() {
   return (
-    <section className="bg-gray-100 pb-6  my-12 ">
+    <section className="bg-gray-100  py-12 ">
       <Container className="py-12">
         <h3 className="section-header">High paying scholarships</h3>
         <Suspense

@@ -56,7 +56,7 @@ export default function Guides() {
   }, [inView, fetchNextPage, isError]);
 
   return (
-    <main>
+    <main className="my-12">
       <Container>
         {toggle ? (
           <div className="w-full">

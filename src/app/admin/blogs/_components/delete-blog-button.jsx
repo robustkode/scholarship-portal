@@ -28,7 +28,7 @@ export function DeleteBlogButton({ type = "submit" }) {
     onSuccess() {
       toast({
         title: "Success",
-        description: "You left this group.",
+        description: "Successfully deleted.",
       });
     },
     onError({ err }) {
@@ -36,7 +36,7 @@ export function DeleteBlogButton({ type = "submit" }) {
       toast({
         title: "Uh oh",
         variant: "destructive",
-        description: "Something went wrong delete scholarship." + err?.message,
+        description: "Something went wrong deleting the blog." + err?.message,
       });
     },
   });
@@ -52,9 +52,8 @@ export function DeleteBlogButton({ type = "submit" }) {
         <AlertDialogHeader>
           <AlertDialogTitle>Delete Group</AlertDialogTitle>
           <AlertDialogDescription>
-            Are you sure you want to delete this group? All your members will no
-            longer be able to view the group information and all data will be
-            removed from our system.
+            Are you sure you want to delete this blog? This action cannot be
+            undone.
           </AlertDialogDescription>
         </AlertDialogHeader>
 

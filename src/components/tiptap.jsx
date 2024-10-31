@@ -28,7 +28,7 @@ export default function TipTap({ content, onChange, height = 700 }) {
     content: content,
     editorProps: {
       attributes: {
-        class: `min-h-[300px] py-4 w-[100%]`,
+        class: `min-h-[300px] p-4 w-[100%]`,
       },
     },
     onUpdate({ editor }) {
@@ -39,7 +39,7 @@ export default function TipTap({ content, onChange, height = 700 }) {
   return (
     <div className="flex flex-col w-full">
       <Toolbar editor={editor} />
-      <div className={`border border-gray-200 mb-4 prose-full`}>
+      <div className={`border border-gray-200 mb-4 prose max-w-none`}>
         <EditorContent editor={editor} />
       </div>
     </div>

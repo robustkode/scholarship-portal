@@ -3,28 +3,18 @@ import { S3Client } from "@aws-sdk/client-s3";
 import { createPresignedPost } from "@aws-sdk/s3-presigned-post";
 
 const s3Client = new S3Client({
-  // region: "auto",
-  // //   endpoint: `https://${env.CLOUDFLARE_ACCOUNT_ID}.r2.cloudflarestorage.com`,
-  // endpoint: "http://localhost:9000",
-  // credentials: {
-  //   //accessKeyId: env.CLOUDFLARE_ACCESS_KEY_ID,
-  //   accessKeyId: "S3RVER",
-  //   secretAccessKey: "S3RVER",
-  //   //secretAccessKey: env.CLOUDFLARE_SECRET_ACCESS_KEY,
-  // },
-
   region: "us-east-1",
-  endpoint: "http://localhost:9000",
+  endpoint: process.env.NEXT_PUBLIC_FILE_BASE_URL,
   forcePathStyle: true,
   credentials: {
-    accessKeyId: "S3RVER",
-    secretAccessKey: "S3RVER",
+    accessKeyId: process.env.S3_ACCESS_KEY_ID,
+    secretAccessKey: process.env.S3_ACCESS_KEY,
   },
 });
 
 export async function uploadFileToBucket(file, filename) {
   const Key = filename;
-  const Bucket = "my-bucket";
+  const Bucket = process.env.S3_BUCKET_NAME;
 
   let res;
 
@@ -53,7 +43,7 @@ export async function uploadFileToBucket(file, filename) {
 export async function getPresignedPostUrl(objectName, contentType) {
   return await createPresignedPost(s3Client, {
     //Bucket: env.CLOUDFLARE_BUCKET_NAME,
-    Bucket: "my-bucket",
+    Bucket: process.env.S3_BUCKET_NAME,
 
     Key: objectName,
     // Conditions: [

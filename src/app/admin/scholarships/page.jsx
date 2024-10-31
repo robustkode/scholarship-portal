@@ -53,7 +53,7 @@ export default function Scholarships() {
   }, [inView, fetchNextPage, isError]);
 
   return (
-    <main>
+    <main className="py-12">
       <Container>
         <div className="flex justify-end">
           <Button className="ml-auto" variant="outline">
@@ -75,10 +75,10 @@ export default function Scholarships() {
             {data.pages.length === 1 &&
             data.pages[0].data.length === 0 &&
             !toggle ? (
-              <div className="flex flex-col items-center gap-4">
-                <h2 className="text-2xl">No Scholarships yet!</h2>
-                <Button className="ml-auto">
-                  <Link href={"/admin/scholarships/create"}>
+              <div className="flex flex-col items-center  gap-4">
+                <h2 className="text-2xl text-center">No Scholarships yet!</h2>
+                <Button className="w-fit">
+                  <Link href={"/admin/scholarships/create"} className="">
                     Create a scholarship
                   </Link>
                 </Button>

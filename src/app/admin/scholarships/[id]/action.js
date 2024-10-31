@@ -48,42 +48,37 @@ export const updateScholarshipAction = authenticatedAction
       openTime: z.number(),
       deadline: z.number(),
       about: z.string().min(3),
-      eligibility: z.string().min(3),
-      documents: z.string(),
-      benefits: z.string(),
-      howApply: z.string(),
       applyLink: z.union([z.string().length(0), z.string().url()]),
-      otherFields: z.string().optional(),
-      coverImage: z.union([z.instanceof(FormData), z.string()]),
       tags: z.array(z.string()),
       degrees: z.array(z.enum(["bh", "ms", "ph", "ot"])),
       countries: z.array(z.string()),
       rTags: z.array(z.string()),
       rDegrees: z.array(z.string()),
       rCountries: z.array(z.string()),
+      content: z.string(),
     })
   )
   .handler(async ({ input, ctx }) => {
-    const file = input.coverImage.get("file");
-    const oldImage = await fetchCoverImageUseCase(input.id);
-    const { url, update } = await updateImageUseCase(
-      oldImage,
-      file,
-      SCHOLARSHIP_IMAGE_DIR
-    );
-    let values = {};
-    if (update) {
-      values = { ...input, coverImage: url };
-    } else {
-      values = { ...input };
-      delete values.coverImage;
-    }
-    delete values.id;
-
+    // const file = input.coverImage.get("file");
+    //const oldImage = await fetchCoverImageUseCase(input.id);
+    // const { url, update } = await updateImageUseCase(
+    //   oldImage,
+    //   file,
+    //   SCHOLARSHIP_IMAGE_DIR
+    // );
+    // let values = {};
+    // if (update) {
+    //   values = { ...input };
+    // } else {
+    //   values = { ...input };
+    //   delete values.coverImage;
+    // }
+    //delete values.id;
+    const { id, ...values } = input;
     values["userId"] = ctx.user.id;
-    await updateScholarshipUseCase(input.id, values);
+    await updateScholarshipUseCase(id, values);
     // revalidateTag("home-recent-scholarships");
     // revalidatePath("/");
-    revalidatePath("/scholarships/" + input.id);
-    redirect("/scholarships/" + input.id);
+    revalidatePath("/scholarships/" + id);
+    redirect("/scholarships/" + id);
   });

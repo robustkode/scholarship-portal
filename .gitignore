@@ -37,8 +37,13 @@ yarn-error.log*
 next-env.d.ts
 
 
-./qa.md
-./note.md
-./next.md
-./sqlite.bak.db
+qa.md
+note.md
+next.md
+
 sqlite.db
+
+./src/db/seed
+src/drizzle/*
+description.txt
+s3

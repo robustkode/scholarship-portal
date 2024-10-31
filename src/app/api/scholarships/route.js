@@ -21,8 +21,10 @@ export const POST = async (req) => {
       updated,
       pageSize: SCHOLARSHIPS_PAGE_SIZE,
     });
+    console.log(scholarships, "schs");
     return new Response(JSON.stringify(scholarships));
   } catch (error) {
+    console.log(error, "scholarships fetch error");
     const isAllowedError = error instanceof PublicError;
     return new Response(
       JSON.stringify({

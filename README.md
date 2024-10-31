@@ -1,36 +1,23 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# Web App Description
 
-## Getting Started
+My web app is designed to empower students in their pursuit of scholarships by providing easy access to tailored opportunities. The platform simplifies the search process, allowing users to find scholarships that suit their individual needs.
 
-First, run the development server:
+## Architecture and Technology
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+The codebase follows clean architecture principles, ensuring maintainability and scalability. I utilize SQLite as the database, connected through Drizzle ORM for efficient data management. The client-side of the app is server-rendered to enhance SEO, while the admin pages are client-side, focusing on functionality without SEO concerns.
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## SEO Enhancements
 
-You can start editing the page by modifying `app/page.js`. The page auto-updates as you edit the file.
+To further improve visibility, I have implemented metadata and a sitemap. OpenGraph data is also included, enabling rich link previews when users share scholarships and articles on social media platforms.
 
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
+## Admin and Moderator Functionality
 
-## Learn More
+Moderators and administrators can create, edit, and delete scholarships and articles. Access to admin pages is protected by middleware, ensuring secure management. User authentication is role-based: while moderators can manage content, they do not have the authority to invite or dismiss other moderators. Password recovery is streamlined; users receive a reset link via email instead of being able to reset passwords directly.
 
-To learn more about Next.js, take a look at the following resources:
+## User Features
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+Students can easily access recent and high-tuition scholarships, with filtering options available by country and degree. Additionally, users can read informative articles and watch guiding videos to aid their scholarship search.
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
+## Future Enhancements
 
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+Looking ahead, I plan to introduce a feature that sends personalized scholarship recommendations based on user preferences and subscriptions, further enhancing the user experience.
